@@ -26,3 +26,5 @@
 </form>
  
 <?= $this->endSection() ?>
+
+<!-- next is restrict the other page and require to login -->
