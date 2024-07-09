@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.0/dist/bootstrap-table.min.css">
     <link rel="stylesheet" href="<?= base_url('css/styles.css'); ?>">
-    <meta name="csrf-token" content="<?= csrf_token() ?>"> <!-- Add this line -->
+    <meta name="csrf-token" content="<?= csrf_hash() ?>"><!-- Add this line -->
 
 </head>
 <body>
@@ -126,14 +126,14 @@
             <option value="pending">Pending</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="product">Product:</label>
-          <select class="form-control" id="product">
-            <option value="product1">Product 1</option>
-            <option value="product2">Product 2</option>
-            <option value="product3">Product 3</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="product">Product:</label>
+            <select class="form-control" id="product">
+              <option value="product1">Product 1</option>
+              <option value="product2">Product 2</option>
+              <option value="product3">Product 3</option>
+            </select>
+          </div>
         <div class="form-group">
           <label for="task-type">Task Type:</label>
           <select class="form-control" id="task-type">

@@ -35,11 +35,11 @@
                 <td class="col-start-time"><?= date('H:i:s', strtotime($log['start_time'])) ?></td>
                 <td class="col-end-time"><?= date('H:i:s', strtotime($log['end_time'])) ?></td>
                 <td class="col-duration"><?= $log['duration'] ?> minutes</td>
-                <td class="col-task"><?= $log['task'] ?? 'N/A' ?></td>
-                <td class="col-proj"><?= $log['project_name'] ?? 'N/A' ?></td>
+                <td class="col-task"><?= $log['task']  ?></td>
+                <td class="col-proj"><?= $log['project_name']  ?></td>
                 <td class="col-act"><?= $log['task_type']  ?></td>
-                <td class="col-status"><?= $log['status'] ?? 'N/A' ?></td>
-                <td class="col-product"><?= $log['product'] ?? 'N/A' ?></td>
+                <td class="col-status"><?= $log['status'] ?></td>
+                <td class="col-product"><?= $log['product'] ?></td>
                 <td class="col-action">
                     <i class="fas fa-edit edit-time-log" style="cursor: pointer;" data-id="<?= $log['id'] ?>"></i>
                     <i class="fas fa-trash-alt delete-time-log ml-2" style="cursor: pointer;" data-id="<?= $log['id'] ?>"></i>

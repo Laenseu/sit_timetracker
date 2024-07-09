@@ -62,7 +62,11 @@ class Home extends BaseController
             'start_time' => $request->getVar('start_time'),
             'end_time' => $request->getVar('end_time'),
             'duration' => $request->getVar('duration'),
-            'task_type' => $request->getVar('task_type')
+            'task_type' => $request->getVar('task_type'),
+            'task' => $request->getVar('task'),
+            'project_name' => $request->getVar('project_name'),
+            'status' => $request->getVar('status'),
+            'product' => $request->getVar('product')
         ];
 
         $saved = $model->saveTimeLog($data);
@@ -83,5 +87,14 @@ class Home extends BaseController
     } else {
         return $this->response->setJSON(['status' => 'error'], Response::HTTP_BAD_REQUEST);
     }
+}
+
+public function project()
+{
+    $projectModel = new ProjectModel(); // Initialize your ProjectModel
+    $data['projects'] = $projectModel->findAll(); // Fetch all projects from the database
+
+    // Load the view with the fetched data
+    return view('layouts/default', $data);
 }
 }

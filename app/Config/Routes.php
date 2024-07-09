@@ -26,3 +26,7 @@ $routes->post('time-tracking/end', 'Home::endTimer');
 
 $routes->post('time-tracking/delete/(:num)', 'Home::deleteTimeLog/$1');
 // $routes->post('time-tracking/update/(:num)', 'Home::updateTimeLog/$1');
+
+
+$routes->get('/', 'Home::project');
+

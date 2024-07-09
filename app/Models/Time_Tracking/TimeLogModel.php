@@ -19,4 +19,6 @@ class TimeLogModel extends Model
     {
         return $this->insert($data);
     }
+
+
 }

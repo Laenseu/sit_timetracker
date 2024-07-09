@@ -47,20 +47,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const csrfMetaTag = document.querySelector('meta[name="csrf-token"]')
     const csrfToken = csrfMetaTag ? csrfMetaTag.getAttribute("content") : ""
+    // const csrfToken = document
+    //   .querySelector('meta[name="csrf-token"]')
+    //   .getAttribute("content")
 
     $.ajax({
       url: "time-tracking/end", // Endpoint to save time log
       type: "POST",
       data: {
-        start_time: startTime.toISOString(),
-        end_time: endTime.toISOString(),
         duration: duration,
         task_type: taskType,
         task: task,
         project_name: projectName,
         status: status,
         product: product,
+        start_time: startTime.toISOString(),
+        end_time: endTime.toISOString(),
         csrf_token: csrfToken,
+      },
+      headers: {
+        "X-CSRF-TOKEN": csrfToken,
       },
       success: function (response) {
         console.log(response)
@@ -140,73 +146,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $("#time-log-table").bootstrapTable()
 
-  // Edit and Delete functionality
-  // $(document).on("click", ".edit-time-log", function (e) {
-  //   e.preventDefault()
-  //   const logId = $(this).data("id")
-  //   // Fetch data for the selected log and populate the modal
-  //   $.ajax({
-  //     url: `time-tracking/get/${logId}`,
-  //     type: "GET",
-  //     success: function (response) {
-  //       $("#edit-log-id").val(response.id)
-  //       $("#edit-start-time").val(
-  //         new Date(response.start_time).toISOString().slice(0, 16)
-  //       )
-  //       $("#edit-end-time").val(
-  //         new Date(response.end_time).toISOString().slice(0, 16)
-  //       )
-  //       $("#edit-task-type").val(response.task_type)
-  //       $("#editModal").modal("show")
-  //     },
-  //     error: function (xhr, status, error) {
-  //       console.error("Error fetching time log:", status, error)
-  //       alert("Error fetching time log")
-  //     },
-  //   })
-  // })
-
-  // $("#saveEditBtn").on("click", function () {
-  //   const logId = $("#edit-log-id").val()
-  //   const startTime = $("#edit-start-time").val()
-  //   const endTime = $("#edit-end-time").val()
-  //   const taskType = $("#edit-task-type").val()
-
-  //   $.ajax({
-  //     url: `time-tracking/update/${logId}`,
-  //     type: "POST",
-  //     data: {
-  //       start_time: startTime,
-  //       end_time: endTime,
-  //       task_type: taskType,
-  //       csrf_token: $('meta[name="csrf-token"]').attr("content"),
-  //     },
-  //     success: function (response) {
-  //       if (response.status === "success") {
-  //         $("#editModal").modal("hide")
-  //         location.reload()
-  //       } else {
-  //         alert("Error updating time log")
-  //       }
-  //     },
-  //     error: function (xhr, status, error) {
-  //       console.error("Error updating time log:", status, error)
-  //       alert("Error updating time log")
-  //     },
-  //   })
-  // })
-
   $(document).on("click", ".delete-time-log", function (e) {
     e.preventDefault()
     if (!confirm("Are you sure you want to delete this time log?")) return
 
     const logId = $(this).data("id")
-
+    const csrfMetaTag = document.querySelector('meta[name="csrf-token"]')
+    const csrfToken = csrfMetaTag ? csrfMetaTag.getAttribute("content") : ""
     $.ajax({
       url: `http://localhost:8080/time-tracking/delete/${logId}`,
       type: "POST",
       data: {
-        csrf_token: $('meta[name="csrf-token"]').attr("content"),
+        csrf_token: csrfToken,
+      },
+      headers: {
+        "X-CSRF-TOKEN": csrfToken,
       },
       success: function (response) {
         // Handle success response
